@@ -3,10 +3,39 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import About from './components/about';
+import Expense from './components/expense';
+import Invoice from './components/invoice';
+import Dashboard from './components/dashboard';
+import Hoc from './components/hoc';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate replace to="/home"/>} />
+        <Route path="/home" element={<App />} >
+            <Route path="expense" element={<Expense/>}/>
+            <Route path="expense/:expense" element={<Expense/>}/>
+            <Route path="invoice" element={<Invoice/>}/>
+        </Route>
+
+        <Route path="/about" element={<About />} />
+        <Route path="/service" element={<App />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/hoc" element={<Hoc />} />
+
+        <Route path="*"
+        element={
+          <h1>Sorry, No page found!!!</h1>
+        }/>
+
+      </Routes>
+
+    </BrowserRouter>
+
+
   </React.StrictMode>,
   document.getElementById('root')
 );
